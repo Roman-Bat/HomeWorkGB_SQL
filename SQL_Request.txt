@@ -1,0 +1,116 @@
+mysql> CREATE DATABASE HumanFriends;
+Query OK, 1 row affected (0,00 sec)
+
+mysql> USE HumanFriends;
+Database changed
+mysql> 
+mysql> CREATE TABLE Pets (
+    ->   id INT AUTO_INCREMENT PRIMARY KEY,
+    ->   name VARCHAR(50) NOT NULL,
+    ->   birth_date DATE NOT NULL,
+    ->   command VARCHAR(50) NOT NULL
+    -> );
+Query OK, 0 rows affected (0,04 sec)
+
+mysql> 
+mysql> CREATE TABLE Pack_animals (
+    ->   id INT AUTO_INCREMENT PRIMARY KEY,
+    ->   name VARCHAR(50) NOT NULL,
+    ->   birth_date DATE NOT NULL,
+    ->   saddle BOOLEAN NOT NULL,
+    ->   load_capacity INT NOT NULL
+    -> );
+Query OK, 0 rows affected (0,02 sec)
+
+mysql> INSERT INTO Pets (name, birth_date, command)
+    -> VALUES
+    ->   ('Бобик', '2020-01-01', 'Сидеть'),
+    ->   ('Мурзик', '2019-05-01', 'Лежать'),
+    ->   ('Кузя', '2021-03-01', 'Бегать');
+Query OK, 3 rows affected (0,02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Pack_animals (name, birth_date, saddle, load_capacity)
+    -> VALUES
+    ->   ('Буревестник', '2018-01-01', TRUE, 500),
+    ->   ('Харьков', '2017-02-02', FALSE, 300),
+    ->   ('Иша', '2019-03-03', FALSE, 100);
+Query OK, 3 rows affected (0,01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Pets WHERE command = 'Сидеть';
++----+------------+------------+--------------+
+| id | name       | birth_date | command      |
++----+------------+------------+--------------+
+|  1 | Бобик      | 2020-01-01 | Сидеть       |
++----+------------+------------+--------------+
+1 row in set (0,00 sec)
+
+mysql> SELECT * FROM Pack_animals WHERE load_capacity > 200;
++----+------------------------+------------+--------+---------------+
+| id | name                   | birth_date | saddle | load_capacity |
++----+------------------------+------------+--------+---------------+
+|  1 | Буревестник            | 2018-01-01 |      1 |           500 |
+|  2 | Харьков                | 2017-02-02 |      0 |           300 |
++----+------------------------+------------+--------+---------------+
+2 rows in set (0,00 sec)
+
+mysql> DELETE FROM Pack_animals WHERE name = 'Харьков';
+Query OK, 1 row affected (0,02 sec)
+
+mysql> CREATE TABLE Equids (
+    ->   id INT AUTO_INCREMENT PRIMARY KEY,
+    ->   name VARCHAR(50) NOT NULL,
+    ->   birth_date DATE NOT NULL,
+    ->   saddle BOOLEAN NOT NULL,
+    ->   load_capacity INT NOT NULL
+    -> );
+Query OK, 0 rows affected (0,02 sec)
+
+mysql> 
+mysql> INSERT INTO Equids (name, birth_date, saddle, load_capacity)
+    -> SELECT name, birth_date, saddle, load_capacity FROM Pack_animals WHERE name = 'Буревестник';
+Query OK, 1 row affected (0,00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO Equids (name, birth_date, saddle, load_capacity)
+    -> SELECT name, birth_date, saddle, load_capacity FROM Pack_animals WHERE name = 'Иша';
+Query OK, 1 row affected (0,01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Young_Animals (
+    ->   id INT AUTO_INCREMENT PRIMARY KEY,
+    ->   name VARCHAR(50) NOT NULL,
+    ->   birth_date DATE NOT NULL,
+    ->   age INT NOT NULL
+    -> );
+Query OK, 0 rows affected (0,06 sec)
+
+mysql> 
+mysql> INSERT INTO Young_Animals (name, birth_date, age)
+    -> SELECT name, birth_date, TIMESTAMPDIFF(YEAR, birth_date, CURDATE()) AS age
+    -> FROM Pets
+    -> WHERE TIMESTAMPDIFF(YEAR, birth_date, CURDATE()) BETWEEN 1 AND 3;
+Query OK, 1 row affected (0,01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> SELECT id, name, birth_date, command, NULL AS saddle, NULL AS load_capacity FROM Pets
+    -> UNION
+    -> SELECT id, name, birth_date, NULL AS command, saddle, load_capacity FROM Pack_animals
+    -> UNION
+    -> SELECT id, name, birth_date, NULL AS command, saddle, load_capacity FROM Equids
+    -> UNION
+    -> SELECT id, name, birth_date, NULL AS command, NULL AS saddle, NULL AS load_capacity FROM Young_Animals;
++----+------------------------+------------+--------------+--------+---------------+
+| id | name                   | birth_date | command      | saddle | load_capacity |
++----+------------------------+------------+--------------+--------+---------------+
+|  1 | Бобик                  | 2020-01-01 | Сидеть       |   NULL |          NULL |
+|  2 | Мурзик                 | 2019-05-01 | Лежать       |   NULL |          NULL |
+|  3 | Кузя                   | 2021-03-01 | Бегать       |   NULL |          NULL |
+|  1 | Буревестник            | 2018-01-01 | NULL         |      1 |           500 |
+|  3 | Иша                    | 2019-03-03 | NULL         |      0 |           100 |
+|  2 | Иша                    | 2019-03-03 | NULL         |      0 |           100 |
+|  1 | Кузя                   | 2021-03-01 | NULL         |   NULL |          NULL |
++----+------------------------+------------+--------------+--------+---------------+
+7 rows in set (0,03 sec)
