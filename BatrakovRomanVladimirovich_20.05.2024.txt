@@ -1,0 +1,78 @@
+ 1668  sudo apt update
+ 1669  sudo apt upgrade
+ 1670  sudo apt install git
+ 1671  pwd
+ 1672  ll
+ 1673  ls
+ 1674  cd Documents/
+ 1675  ll
+ 1676  mkdir HomeWorkGB
+ 1677  cd HomeWorkGB/
+ 1678  git init
+ 1679  git status
+ 1680  cat README.MD
+ 1681  cat > README.MD
+ 1682  git add README.md
+ 1683  ll
+ 1684  git add README.MD
+ 1685  git commit -m "Start work. Create Readme"
+ 1686  git branch -M main
+ 1687  git remote add origin https://github.com/Roman-Bat/HomeWorkGB_SQL.git
+ 1688  git push -u origin main
+ 1689  git remote add origin https://github.com/Roman-Bat/HomeWorkGB_SQL.git
+ 1690  git branch -M main
+ 1691  git push -u origin main
+ 1692  git push
+ 1693  git branch -M main
+ 1694  git push
+ 1695  git push --set-upstream origin main
+ 1696  git status
+ 1697  cat README.MD 
+ 1698  nano README.MD 
+ 1699  git commit -am "Add information about first task"
+ 1700  git push
+ 1701  cat > Pets.txt
+ 1702  cat Pets.txt 
+ 1703  cat > PackAnimals.txt
+ 1704  cat Pets.txt PackAnimals.txt > AllAnimals.txt
+ 1705  cat AllAnimals.txt
+ 1706  nano AllAnimals.txt 
+ 1707  mv AllAnimals.txt HumanFriends.txt
+ 1708  ls
+ 1709  nano Pets.txt 
+ 1710  git add.
+ 1711  git .add
+ 1712  git add .
+ 1713  git commit -am "Completed the first Task Operating Systems and Virtualization (Linux)"
+ 1714  git config --global user.name "Roman-Bat"
+ 1715  git config --global user.email "kyct69@yandex.ru"
+ 1716  git push
+ 1717  nano README.MD 
+ 1718  mkdir Animals
+ 1719  mv HumanFriends.txt Animals/
+ 1720  tree
+ 1721  git add .
+ 1722  git commit -am "Completed the second Task Operating Systems and Virtualization (Linux)"
+ 1723  git push
+ 1724  sudo apt install mysql-server
+ 1725  sudo systemctl start mysql
+ 1726  sudo systemctl status mysql
+ 1727  wget -qO - https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb | sudo dpkg -i -
+ 1728  wget -qO - https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb | sudo dpkg -i
+ 1729  sudo wget -qO - https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb | sudo dpkg -i -
+ 1730  sudo apt-get install mysql-apt-config
+ 1731  wget -qO - https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb | sudo dpkg -i -
+ 1732  sudo apt-get update
+ 1733  wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
+ 1734  sudo dpkg -i mysql-apt-config_0.8.16-1_all.deb
+ 1735  sudo apt-get install mysql-workbench
+ 1736  wget -qO - https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb | sudo dpkg -i -
+ 1737  sudo apt-get update
+ 1738  cleat
+ 1739  clear
+ 1740  wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
+ 1741  sudo dpkg -i mysql-apt-config_0.8.16-1_all.deb
+ 1742  wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
+ 1743  sudo dpkg -r mysql-apt-config
+ 1744  sudo apt-get autoremove
+ 1745  history > BatrakovRomanVladimirovich_20.05.2024.txt
