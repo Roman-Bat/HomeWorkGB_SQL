@@ -4,7 +4,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * Класс Main содержит основной цикл программы и методы для работы с животными.
+ */
 public class Main {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private List<Animal> animals = new ArrayList<>();
@@ -49,10 +51,14 @@ public class Main {
             scanner.nextLine(); // прочитать символ перевода строки
         }
     }
-
+    /**
+     * Метод для добавления нового животного в реестр.
+     *
+     * @param scanner объект Scanner для чтения данных из консоли
+     */
     public void addAnimal(Scanner scanner) {
         System.out.println("Введите имя животного:");
-        String name = scanner.nextLine();
+        String name = scanner.next();
         scanner.nextLine(); // читаем и игнорируем символ перевода строки
 
         boolean isDateValid = false;
@@ -135,8 +141,11 @@ public class Main {
         System.out.println("Животное успешно добавлено.");
     }
 
-
-
+    /**
+     * Метод для вывода списка команд, которые могут выполнять животные.
+     *
+     * @param scanner объект Scanner для чтения данных из консоли
+     */
     public void printCommands(Scanner scanner) {
         List<String> commands = new ArrayList<>();
 
@@ -159,7 +168,10 @@ public class Main {
             }
         }
     }
-
+    /**
+     Метод для обучения животного новой команде.
+     @param scanner объект Scanner для чтения данных из консоли
+     */
     public void addCommand(Scanner scanner) {
         // выводим запрос на выбор типа животного
         System.out.println("Выберите животное, которому хотите добавить новую команду:");
@@ -193,12 +205,14 @@ public class Main {
         }
     }
 
+    /**
 
-
-
+     Метод для вывода списка животных, родившихся в указанную дату.
+     @param scanner объект Scanner для чтения данных из консоли */
     public void printAnimalsByBirthDate(Scanner scanner) {
         System.out.println("Введите дату (формат: dd.MM.yyyy):");
-        String dateString = scanner.nextLine();
+        String dateString = scanner.next();
+        scanner.nextLine();
         LocalDate date = null;
         while (date == null) {
             try {
@@ -226,11 +240,17 @@ public class Main {
             System.out.println(animal.getName());
         }
     }
-
+    /**
+    Метод для вывода общего количества созданных животных.
+     */
     public void printAnimalCount() {
         System.out.println("Общее количество созданных животных: " + animalCount);
     }
+    /**
 
+     Метод для поиска животного по имени.
+     @param name имя животного
+     @return объект Animal, если животное найдено, или null, если животное не найдено */
     private Animal findAnimalByName(String name) {
         for (Animal animal : animals) {
             if (animal.getName().equals(name)) {
